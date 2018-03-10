@@ -10,7 +10,7 @@
  {
   //Create the SVG graph.
   var svg = d3.select("body").append("svg").attr("width", "500").attr("height", "500"),
-     margin = {top: 20, right: 80, bottom: 30, left: 50},
+     margin = {top: 20, right: 0, bottom: 30, left: 50},
     width = svg.attr("width") - margin.left - margin.right,
     height = svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -23,8 +23,8 @@ var x = d3.scaleTime().range([0, width]),
 
 var line = d3.line()
     .curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.temperature); });
+    .x(function(d) { return x(d[0])})
+    .y(function(d) { return y(d[1]); });
 
 d3.csv("dummydata.csv", type, function(error, data) {
   if (error) throw error;
@@ -35,22 +35,22 @@ d3.csv("dummydata.csv", type, function(error, data) {
       values:toDate(id)
     };
   });
-  console.log(cities)
-  console.log(data.slice(1))
-  x.domain(d3.extent(data, function(d) { return d.date; }));
+  console.log(usages)
+  var min = parseTime("10/03/2018");
+  var max = parseTime("14/03/2018")
+  x.domain([min, max]);
+  y.domain([0, 550]);
 
-  y.domain([
-    d3.min(cities, function(c) { return d3.min(c.values, function(d) { return d.temperature; }); }),
-    d3.max(cities, function(c) { return d3.max(c.values, function(d) { return d.temperature; }); })
-  ]);
+  z.domain(usages.map(function(c) { return c.id; }));
+  console.log(usages.map(function(c) { return c.id; }));
 
-  z.domain(cities.map(function(c) { return c.id; }));
-
+  // x axis
   g.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
+  // y axis
   g.append("g")
       .attr("class", "axis axis--y")
       .call(d3.axisLeft(y))
@@ -59,36 +59,59 @@ d3.csv("dummydata.csv", type, function(error, data) {
       .attr("y", 6)
       .attr("dy", "0.71em")
       .attr("fill", "#000")
-      .text("Temperature, ºF");
+      .text("Water Usage/L");
 
-  var city = g.selectAll(".city")
-    .data(cities)
+  var usage = g.selectAll(".usage")
+    .data(usages)
     .enter().append("g")
-      .attr("class", "city");
+    .attr("class", "usage");
 
-  city.append("path")
+  usage.append("path")
       .attr("class", "line")
-      .attr("d", function(d) { return line(d.values); })
-      .style("stroke", function(d) { return z(d.id); });
+      .attr("d", plotLine)
+      .style("stroke", plotStroke);
 
-  city.append("text")
-      .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-      .attr("x", 3)
-      .attr("dy", "0.35em")
-      .style("font", "10px sans-serif")
-      .text(function(d) { return d.id; });
+  // usage.append("text")
+  //     .datum(plottingTest(d))
+  //     .attr("transform", function(d) { return "translate(" + x(d.value.key) + "," + y(d.value.temperature) + ")"; })
+  //     .attr("x", 3)
+  //     .attr("dy", "0.35em")
+  //     .style("font", "10px sans-serif")
+  //     .text(function(d) { return d.id; });
 });
+
+function plotLine(data){
+  console.log(data.values)
+  var dat = []
+  for (var key in data.values){
+    console.log(typeof parseTime(key))
+    console.log(x(parseTime(key)))
+    var xypair = [parseTime(key), data.values[key]]
+    dat.push(xypair)
+  }
+  console.log(line(dat))
+  return line(dat)
+}
+
+function linex(data){
+  console.log("Hi")
+  console.log(data.key)
+  return x(d.key)
+}
+
+function plotStroke(data){
+  console.log(z(data.id))
+  return z(data.id)
+}
 
 function toDate(id){
   myObject = {}
   for (var key in id){
     if (key != "" && key != "date"){
-      console.log(key)
-      myObject[parseTime(key.toString())] = id[key]
+      console.log(typeof parseTime(key.toString()))
+      myObject[key.toString()] = id[key]
     }
   }
-  console.log(myObject)
   return myObject
 }
 
