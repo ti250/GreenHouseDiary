@@ -16,7 +16,6 @@
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var parseTime = d3.timeParse("%d/%m/%Y");
-console.log(parseTime(10/03/2018))
 
 var x = d3.scaleTime().range([0, width]),
     y = d3.scaleLinear().range([height, 0]),
@@ -30,7 +29,7 @@ var line = d3.line()
 d3.csv("dummydata.csv", type, function(error, data) {
   if (error) throw error;
 
-  var cities = data.slice(1).map(function(id) {
+  var usages = data.slice(1).map(function(id) {
     return {
       id: id[""],
       values:toDate(id)
@@ -86,9 +85,10 @@ function toDate(id){
   for (var key in id){
     if (key != "" && key != "date"){
       console.log(key)
-      myObject[parseTime(key)] = id[key]
+      myObject[parseTime(key.toString())] = id[key]
     }
   }
+  console.log(myObject)
   return myObject
 }
 
