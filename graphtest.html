@@ -35,6 +35,7 @@ d3.csv("dummydata.csv", type, function(error, data) {
       values:toDate(id)
     };
   });
+  usages = [{id:"total", values: consolidateData(usages)}]
   console.log(usages)
   var min = parseTime("10/03/2018");
   var max = parseTime("14/03/2018")
@@ -112,6 +113,26 @@ function toDate(id){
       myObject[key.toString()] = id[key]
     }
   }
+  return myObject
+}
+
+function consolidateData(data){
+  var myObject = {}
+  console.log(data)
+  var i = 0
+  while (i<data.length){
+    element = data[i]
+    for (var key in element.values){
+      if (key in myObject){
+        myObject[key] += element.values[key]
+      }
+      else{
+        myObject[key] = element.values[key]
+      }
+    }
+    i+=1;
+  }
+  console.log(myObject)
   return myObject
 }
 
