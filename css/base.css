@@ -1,533 +1,928 @@
-/*----------------------------------------------------------------------------
-  Global Reset
-----------------------------------------------------------------------------*/
+/* =================================================================== 
+ *
+ *  Glint v1.0 Base Stylesheet
+ *  11-20-2017
+ *  ------------------------------------------------------------------
+ *
+ *  TOC:
+ *  # imports 
+ *  # normalize
+ *  # basic/base setup styles
+ *      ## Media
+ *      ## Typography resets 
+ *      ## links
+ *      ## inputs
+ *  # grid
+ *      ## medium size devices
+ *      ## tablets
+ *      ## mobile devices
+ *      ## small mobile devices
+ *  # block grids
+ *      ## medium size devices
+ *      ## tablets
+ *      ## mobile devices
+ *      ## small mobile devices
+ *  # MISC
+ *
+ * =================================================================== */
 
-* {
-  padding:0;
-  margin:0;
-}
-h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin:1em 0; }
-fieldset { padding: .5em; }
-select option{ padding:0 5px; }
 
-.access{ display:none; } /* For accessibility related elements */
-.clear{ clear:both; height:0px; font-size:0px; line-height:0px; overflow:hidden; }
-a{ outline:none; }
-a img{ border:none; }
+/* ===================================================================
+ * # imports 
+ *
+ * ------------------------------------------------------------------- */
+@import url("font-awesome/css/font-awesome.min.css");
+@import url("micons/micons.css");
+@import url("fonts.css");
 
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-* html .clearfix { height: 1%; }
-.clearfix { display:inline-block; }
-.clearfix { display: block; }
 
-/*----------------------------------------------------------------------------
-  Main Layout
-----------------------------------------------------------------------------*/
-
-@font-face {
-    font-family: AvenirLTStd;
-    font-style: normal;
-    src: url("AvenirLTStd-Book.otf") format("opentype");
-    font-display: swap;
+/* ===================================================================
+ * # normalize
+ * normalize.css v5.0.0 | MIT License | 
+ * github.com/necolas/normalize.css
+ *
+ * ------------------------------------------------------------------- */
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: "AvenirLTStd", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 14.5px;
-  color: #333;
-  text-shadow: 0 1px 0 rgba(255,255,255,1.0);
+    margin: 0;
 }
 
-p {
-  color: #222;
-  font-size: 19px;
-}
-
-a.top-link {
-  color: black;
-  margin-top: 40px;
-  font-size: 60px;
-  text-decoration: none;
-}
-
-a.top-link:hover {
-  margin-top: 40px;
-  color: black;
-  font-size: 60px;
-  text-decoration: none;
-}
-
-strong {
-  font-weight: bold;
-}
-
-a {
-  color: #2382c8;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-hr {
-  margin: 20px 0 25px 0;
-  text-align: center;
-  letter-spacing: 3px;
-  font-size: 20px;
-  color: #ddd;
-  border: none;
-}
-hr:before {
-  content: '\2022 \2022 \2022 \2022 \2022';
-}
-
-.container {
-  width: 60%;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-
-@media(max-width: 768px) {
-  .container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-}
-
-.header-container {
-  margin: 0 auto;
-}
-
-header {
-  margin: 20px 0 20px 0;
-  /* text-align: right; */
-}
-
-ul.nav {
-  margin: 0;
-  padding: 8px 0 8px 0;
-  list-style-type: none;
-}
-ul.nav li {
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 18px;
-  font-weight: 300;
-}
-@media only screen and (max-width: 520px) {
-  ul.nav {
-    position: relative;
-    padding-top: 40px;
-  }
-  ul.nav li {
-    margin: 0 4px;
-    font-size: 13px;
-  }
-  ul.nav li.logo {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    margin-left: -14px;
-  }
-}
-ul.nav li a {
-  color: black;
-  margin-right: 10px;
-  text-decoration: none;
-  font-weight: lighter;
-}
-
-ul.nav li.logo {
-  text-transform: none;
-}
-ul.nav li.logo a {
-  position: relative;
-  top: -2px;
-  display: inline-block;
-  width: 27px;
-  height: 27px;
-  line-height: 26px;
-  color: #fff;
-  font-weight: bold;
-  background: #556270;
-  border-radius: 100px;
-  box-shadow: 0 1px 0 rgba(255,255,255,1.0);
-}
-
-/*------------------------------------------------------------------------------
-  Home Page
-------------------------------------------------------------------------------*/
-
-.listing {
-  margin-top: 60px;
-}
-
-.listing .post {
-  margin: 60px 0;
-}
-.listing .post:first-child {
-  margin-top: 22px;
-}
-
-.listing .post p.date {
-  font-size: 14px;
-  color: #bbb;
-}
-
-.listing .post h2 {
-  margin: 0 0 -20px 0;
-  font-size: 30px;
-  border: none;
-}
-
-.listing .post h2 a {
-  color: #000;
-  text-decoration: none;
-  font-size: 40px;
-}
-
-.listing .post h2 i {
-  font-size: 40px;
-}
-
-.listing .post .post-summary {
-  font-size: 20px;
-  color: #777;
-}
-
-.listing .post.other {
-  color: #666;
-  /*border-left: 1px solid #ddd;*/
-}
-.listing .post.other h2 {
-  margin: -5px 0 -15px 0;
-  font-size: 21px;
-  font-weight: lighter;
-}
-.listing .post.other h2 a {
-  color: #000;
-}
-.listing .post.other h2 a:hover {
-  color: deepskyblue;
-}
-.listing .post.other p:last-child {
-  margin-bottom: 0;
-}
-
-.listing .post.other .icon {
-  float: left;
-  margin-top: -3px;
-  margin-left: -35px;
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-  color: #ddd;
-}
-.listing .post.other .icon:hover {
-  text-decoration: none;
-  color: #bbb;
-}
-
-.listing blockquote {
-  border-left-color: #ddd;
-}
-
-@media only screen and (max-width: 520px) {
-  .listing .post {
-    margin: 30px 0;
-  }
-
-  .listing .post h2 {
-    font-size: 24px;
-  }
-
-  .listing .post .post-summary {
-    font-size: 18px;
-  }
-}
-
-/*------------------------------------------------------------------------------
-  Post Styles
-------------------------------------------------------------------------------*/
-
-p.date {
-  color: #aaa;
-  margin: 20px 0 0 0;
-}
-
-p.intro {
-  font-size: 32px;
-  line-height: 1.2;
-  text-align: justify;
-  font-weight: lighter;
-}
-@media only screen and (max-width: 520px) {
-  p.intro {
-    font-size: 20px;
-  }
-}
-p.intro a {
-  color: #55acee;
+article,
+aside,
+footer,
+header,
+nav,
+section {
+    display: block;
 }
 
 h1 {
-  margin-left: 20px;
-}
-h1.words {
-  color: #DB2C17;
-}
-h1.link {
-  font-size: 32px;
-}
-h1.link .desc {
-  font-weight: normal;
-  color: #000;
-}
-@media only screen and (max-width: 700px) {
-  h1 {
-    font-size: 48px;
-    letter-spacing: 0;
-  }
+    font-size: 2em;
+    margin: 0.67em 0;
 }
 
-h2 {
-  margin: 2.0em 0 -0.5em 0;
-  font-size: 20px;
-  color: #000;
+figcaption,
+figure,
+main {
+    display: block;
 }
 
-h3 {
-  margin: 2.0em 0 -0.75em 0;
-  font-size: 17px;
-  color: #333;
-}
-h3 a, h3 a:visited, h2 a, h2 a:visited{ color:#000; }
-h3 a:hover, h2 a:hover{ color:#000; border:none; }
-
-h4 {
-  font-size: 1em;
-  font-weight: normal;
-  color: #000;
+figure {
+    margin: 1em 40px;
 }
 
-.pagination  {
-  text-align: right;
-}
-.figure {
-  margin: 19px 0 19px 0;
-  padding: 2px;
-  text-align: center;
-  border: 1px solid #ddd;
-  background: #f5f5f5;
-  line-height: 0;
-}
-.fig-a {
-  float: right;
-  margin-left: 15px;
-}
-.figure small {
-  margin: 2px 0 0 0;
-  padding: 5px 7px;
-  display: block;
-  font-size: 11px;
-  line-height: 12px;
-  text-align: left;
-  color: #666;
-  background: #ddd;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
-}
-.figure small strong {
-  text-transform: uppercase;
-}
-.figure img {
-  max-width: 100%;
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
 }
 
-blockquote {
-  margin: 1.0em 0;
-  padding: 0 0 0 15px;
-  font-size: 16px;
-  border-left: 2px solid #aaa;
-}
-blockquote p {
-  margin: 12px 0;
-  color: #999;
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
 }
 
-table {
-	width: 100%;
-	border-top: 1px solid #CCCCCC;
-	border-bottom: 2px solid #CCC;
-	color: #000;
-	background: #fff;
-	border-collapse: separate;
-	font-size: 11px;
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
 }
 
-caption {
-	padding: 10px 10px 5px 0;
-	text-align: left;
-	font-size: 12px;
-	text-transform: uppercase;
-	font-weight: bold;
+a:active,
+a:hover {
+    outline-width: 0;
 }
 
-th {
-	text-align: center;
-	padding: 5px;
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
 }
 
-td {
-	text-align: center;
-	padding: 3px 5px;
-}
-.odd td {
-	background: #F0F1F2;
-}
-table.data th, table.data td {
-  text-align: left;
+b,
+strong {
+    font-weight: inherit;
 }
 
-p.note {
-  color: #666;
+b,
+strong {
+    font-weight: bolder;
 }
 
-.twitter-tweet-rendered {
-  padding: 10px 0;
+code,
+kbd,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
 }
 
-@media only screen and (max-width: 520px) {
-  h1 {
-    font-size: 30px;
-    line-height: 1.0;
-    letter-spacing: 0;
-  }
+dfn {
+    font-style: italic;
+}
 
-  .container .twitter-tweet-rendered.tw-align-center {
-    width: 100% !important;
-  }
+mark {
+    background-color: #ff0;
+    color: #000;
+}
+
+small {
+    font-size: 80%;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+audio,
+video {
+    display: inline-block;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
 }
 
 img {
-  max-width: 100%;
+    border-style: none;
 }
 
-p > a > img {
-  max-width: 100%;
-}
-/*----------------------------------------------------------------------------
-  Follow Box
-----------------------------------------------------------------------------*/
-
-.keep-in-touch {
-  text-align: right;
-  margin: 30px 0;
-  border-top: 1px solid #dfe4ea;
-}
-.keep-in-touch p:first-child {
-  margin-top: 0;
-  padding-top: 20px;
-  border-top: 1px solid #fff;
-}
-.keep-in-touch a {
-  color: #55acee;
+svg:not(:root) {
+    overflow: hidden;
 }
 
-.post-date {
-  font-size: 14px;
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
 }
 
-@media only screen and (max-width: 520px) {
-  .keep-in-touch {
-    font-size: 14px;
-  }
+button,
+input {
+    overflow: visible;
 }
 
-/*----------------------------------------------------------------------------
-  Code Styles
-----------------------------------------------------------------------------*/
-
-pre {
-  margin: 16px 0;
-  padding: 10px;
-  color: #444;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  border-radius: 4px;
-  overflow: auto;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-code{
-  padding: 0 4px;
-  font-size: 0.9em;
-  color: #556270;
-  background: #F4FAFF;
-  border-radius: 3px;
-}
-pre code {
-  padding: 0;
-  color: inherit;
-  background: inherit;
-  border-radius: 0;
-}
-code span.global {
-  color: #3388DD;
-}
-code span.brackets {
-  color: #777777;
-}
-code span.string {
-  color: #BC6710;
-}
-code span.symbol, code span.selectors {
-  color: #1199EE;
-}
-code span.properties {
-  color: #BB4411;
-}
-code span.keywords {
-  color: #44BB22;
-}
-code span.comment {
-  color: #BCBCBC;
-}
-code span.shell {
-  background:#f1f1f1;
+button,
+select {
+    text-transform: none;
 }
 
-code.html span.tag, code.xaml span.tag {
-  color: #BB4411;
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
 }
-code.html span.attribute, code.xaml span.attribute {
-  color: #44BB22;
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
 }
-code.html span.string, code.xaml span.string {
-  color: blue;
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
 }
-code.html span.comment, code.xaml span.comment {
-  color: #999999;
+
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
 }
-code.html span.doctype {
-  color: #D7FF80;
+
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+}
+
+progress {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+textarea {
+    overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+details,
+menu {
+    display: block;
+}
+
+summary {
+    display: list-item;
+}
+
+canvas {
+    display: inline-block;
+}
+
+template {
+    display: none;
+}
+
+[hidden] {
+    display: none;
 }
 
 
-.social-media-icons  {
-  float: left;
-  margin-right: 6px;
-  color: black;
+/* ===================================================================
+ * # basic/base setup styles
+ *
+ * ------------------------------------------------------------------- */
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-weight: normal;
+    line-height: 1;
+    word-wrap: break-word;
+    text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: none;
+}
+
+body,
+input,
+button {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 
 
-.owner-name {
-  margin-left: 0;
+/* ------------------------------------------------------------------- 
+ * ## Media
+ * ------------------------------------------------------------------- */
+img,
+video {
+    max-width: 100%;
+    height: auto;
 }
-/* @end */
+
+
+/* ------------------------------------------------------------------- 
+ * ## Typography resets 
+ * ------------------------------------------------------------------- */
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    -webkit-font-smoothing: auto;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-variant-ligatures: common-ligatures;
+    -moz-font-variant-ligatures: common-ligatures;
+    font-variant-ligatures: common-ligatures;
+    text-rendering: optimizeLegibility;
+}
+
+em,
+i {
+    font-style: italic;
+    line-height: inherit;
+}
+
+strong,
+b {
+    font-weight: bold;
+    line-height: inherit;
+}
+
+small {
+    font-size: 60%;
+    line-height: inherit;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+li {
+    display: block;
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## links 
+ * ------------------------------------------------------------------- */
+a {
+    text-decoration: none;
+    line-height: inherit;
+}
+
+a img {
+    border: none;
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## inputs 
+ * ------------------------------------------------------------------- */
+fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+
+/* ===================================================================
+ * # grid
+ *
+ * ------------------------------------------------------------------- */
+.row {
+    width: 94%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row .row {
+    width: auto;
+    max-width: none;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+
+/* column blocks
+ * -------------------------------------- */
+[class*="col-"] {
+    float: left;
+    padding: 0 20px;
+}
+
+[class*="col-"]+[class*="col-"].end {
+    float: right;
+}
+
+
+/* column width classes 
+ * -------------------------------------- */
+.col-one {
+    width: 8.33333%;
+}
+
+.col-two,
+.col-1-6 {
+    width: 16.66667%;
+}
+
+.col-three,
+.col-1-4 {
+    width: 25%;
+}
+
+.col-four,
+.col-1-3 {
+    width: 33.33333%;
+}
+
+.col-five {
+    width: 41.66667%;
+}
+
+.col-six,
+.col-1-2 {
+    width: 50%;
+}
+
+.col-seven {
+    width: 58.33333%;
+}
+
+.col-eight,
+.col-2-3 {
+    width: 66.66667%;
+}
+
+.col-nine,
+.col-3-4 {
+    width: 75%;
+}
+
+.col-ten,
+.col-5-6 {
+    width: 83.33333%;
+}
+
+.col-eleven {
+    width: 91.66667%;
+}
+
+.col-twelve,
+.col-full {
+    width: 100%;
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## medium size devices
+ * ------------------------------------------------------------------- */
+@media only screen and (max-width: 1200px) {
+    .row .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    [class*="col-"] {
+        padding: 0 15px;
+    }
+    .md-two,
+    .md-1-6 {
+        width: 16.66667%;
+    }
+    .md-one {
+        width: 8.33333%;
+    }
+    .md-three,
+    .md-1-4 {
+        width: 25%;
+    }
+    .md-four,
+    .md-1-3 {
+        width: 33.33333%;
+    }
+    .md-five {
+        width: 41.66667%;
+    }
+    .md-six,
+    .md-1-2 {
+        width: 50%;
+    }
+    .md-seven {
+        width: 58.33333%;
+    }
+    .md-eight,
+    .md-2-3 {
+        width: 66.66667%;
+    }
+    .md-nine,
+    .md-3-4 {
+        width: 75%;
+    }
+    .md-ten,
+    .md-5-6 {
+        width: 83.33333%;
+    }
+    .md-eleven {
+        width: 91.66667%;
+    }
+    .md-twelve,
+    .md-full {
+        width: 100%;
+    }
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## tablets
+ * ------------------------------------------------------------------- */
+@media only screen and (max-width: 800px) {
+    .row {
+        width: 90%;
+    }
+    .tab-1-4 {
+        width: 25%;
+    }
+    .tab-1-3 {
+        width: 33.33333%;
+    }
+    .tab-1-2 {
+        width: 50%;
+    }
+    .tab-2-3 {
+        width: 66.66667%;
+    }
+    .tab-3-4 {
+        width: 75%;
+    }
+    .tab-full {
+        width: 100%;
+    }
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## mobile devices
+ * ------------------------------------------------------------------- */
+@media only screen and (max-width: 600px) {
+    .row {
+        width: auto;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .row .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    [class*="col-"] {
+        padding: 0 10px;
+    }
+    .mob-1-4 {
+        width: 25%;
+    }
+    .mob-1-3 {
+        width: 33.33333%;
+    }
+    .mob-1-2 {
+        width: 50%;
+    }
+    .mob-2-3 {
+        width: 66.66667%;
+    }
+    .mob-3-4 {
+        width: 75%;
+    }
+    .mob-full {
+        width: 100%;
+    }
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## small mobile devices
+ * ------------------------------------------------------------------- */
+
+/* stack columns on small mobile devices
+ * ------------------------------------------------------------------- */
+
+@media only screen and (max-width: 400px) {
+    .row .row {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    [class*="col-"] {
+        width: 100% !important;
+        float: none !important;
+        clear: both !important;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+    }
+    [class*="col-"]+[class*="col-"].end {
+        float: none;
+    }
+}
+
+
+/* ===================================================================
+ * # block grids
+ * ------------------------------------------------------------------- */
+
+/*   Equally-sized columns define at row level
+ * ------------------------------------------------------------------- */
+[class*="block-"]:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.block-1-6 .col-block {
+    width: 16.66667%;
+}
+
+.block-1-5 .col-block {
+    width: 20%;
+}
+
+.block-1-4 .col-block {
+    width: 25%;
+}
+
+.block-1-3 .col-block {
+    width: 33.33333%;
+}
+
+.block-1-2 .col-block {
+    width: 50%;
+}
+
+
+/**
+ * Clearing for block grid columns. Allow columns with 
+ * different heights to align properly.
+ */
+
+.block-1-6 .col-block:nth-child(6n+1),
+.block-1-5 .col-block:nth-child(5n+1),
+.block-1-4 .col-block:nth-child(4n+1),
+.block-1-3 .col-block:nth-child(3n+1),
+.block-1-2 .col-block:nth-child(2n+1) {
+    clear: both;
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## medium size devices
+ * ------------------------------------------------------------------- */
+@media only screen and (max-width: 1200px) {
+    .block-m-1-6 .col-block {
+        width: 16.66667%;
+    }
+    .block-m-1-5 .col-block {
+        width: 20%;
+    }
+    .block-m-1-4 .col-block {
+        width: 25%;
+    }
+    .block-m-1-3 .col-block {
+        width: 33.33333%;
+    }
+    .block-m-1-2 .col-block {
+        width: 50%;
+    }
+    .block-m-full .col-block {
+        width: 100%;
+        clear: both;
+    }
+    [class*="block-m-"] .col-block:nth-child(n) {
+        clear: none;
+    }
+    .block-m-1-6 .col-block:nth-child(6n+1),
+    .block-m-1-5 .col-block:nth-child(5n+1),
+    .block-m-1-4 .col-block:nth-child(4n+1),
+    .block-m-1-3 .col-block:nth-child(3n+1),
+    .block-m-1-2 .col-block:nth-child(2n+1) {
+        clear: both;
+    }
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## tablets
+ * ------------------------------------------------------------------- */
+@media only screen and (max-width: 800px) {
+    .block-tab-1-6 .col-block {
+        width: 16.66667%;
+    }
+    .block-tab-1-5 .col-block {
+        width: 20%;
+    }
+    .block-tab-1-4 .col-block {
+        width: 25%;
+    }
+    .block-tab-1-3 .col-block {
+        width: 33.33333%;
+    }
+    .block-tab-1-2 .col-block {
+        width: 50%;
+    }
+    .block-tab-full .col-block {
+        width: 100%;
+        clear: both;
+    }
+    [class*="block-tab-"] .col-block:nth-child(n) {
+        clear: none;
+    }
+    .block-tab-1-6 .col-block:nth-child(6n+1),
+    .block-tab-1-6 .col-block:nth-child(5n+1),
+    .block-tab-1-4 .col-block:nth-child(4n+1),
+    .block-tab-1-3 .col-block:nth-child(3n+1),
+    .block-tab-1-2 .col-block:nth-child(2n+1) {
+        clear: both;
+    }
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## mobile devices
+ * ------------------------------------------------------------------- */
+@media only screen and (max-width: 600px) {
+    .block-mob-1-6 .col-block {
+        width: 16.66667%;
+    }
+    .block-mob-1-5 .col-block {
+        width: 20%;
+    }
+    .block-mob-1-4 .col-block {
+        width: 25%;
+    }
+    .block-mob-1-3 .col-block {
+        width: 33.33333%;
+    }
+    .block-mob-1-2 .col-block {
+        width: 50%;
+    }
+    .block-mob-full .col-block {
+        width: 100%;
+        clear: both;
+    }
+    [class*="block-mob-"] .col-block:nth-child(n) {
+        clear: none;
+    }
+    .block-mob-1-6 .col-block:nth-child(6n+1),
+    .block-mob-1-5 .col-block:nth-child(5n+1),
+    .block-mob-1-4 .col-block:nth-child(4n+1),
+    .block-mob-1-3 .col-block:nth-child(3n+1),
+    .block-mob-1-2 .col-block:nth-child(2n+1) {
+        clear: both;
+    }
+}
+
+
+/* ------------------------------------------------------------------- 
+ * ## small mobile devices
+ * ------------------------------------------------------------------- */
+
+/* stack columns on small mobile devices
+ * ------------------------------------------------------------------- */
+
+@media only screen and (max-width: 400px) {
+    .stack .col-block {
+        width: 100% !important;
+        float: none !important;
+        clear: both !important;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+
+/* ===================================================================
+ * # MISC
+ *
+ * ------------------------------------------------------------------- */
+.group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* Misc Helper Styles
+ * -------------------------------------- */
+.is-hidden {
+    display: none;
+}
+
+.is-invisible {
+    visibility: hidden;
+}
+
+.antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.remove-bottom {
+    margin-bottom: 0;
+}
+
+.half-bottom {
+    margin-bottom: 1.5rem !important;
+}
+
+.add-bottom {
+    margin-bottom: 3rem !important;
+}
+
+.no-border {
+    border: none;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.align-center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+/*# sourceMappingURL=base.css.map */
